@@ -6,6 +6,11 @@ GOGET=$(GOCMD) get
 GOMOD=$(GOCMD) mod
 BINARY_NAME=cc-intel-platform-registration
 
+# Docker image parameters
+VERSION=dev
+DOCKER_REGISTRY=local
+DOCKER_IMAGE=$(DOCKER_REGISTRY)/cc-intel-platform-registration:$(VERSION)
+
 # Tools
 GOLANGCI_LINT=golangci-lint
 STATICCHECK=staticcheck
@@ -13,7 +18,13 @@ GOVULNCHECK=$(GOCMD) run golang.org/x/vuln/cmd/govulncheck@latest
 
 .PHONY: all build test clean deps lint security-check check
 
-all: check build
+all: check build-image
+
+build-image:
+	docker build -t $(DOCKER_IMAGE) .
+
+push-image:
+	docker push $(DOCKER_IMAGE)
 
 build:
 	$(GOBUILD) -o $(BINARY_NAME) -v
