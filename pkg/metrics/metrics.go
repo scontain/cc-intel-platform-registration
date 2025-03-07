@@ -3,7 +3,6 @@ package metrics
 import (
 	"fmt"
 	"log/slog"
-	"strconv"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -98,20 +97,6 @@ type StatusCodeMetric struct {
 	Status         StatusCode
 	HttpStatusCode string
 	IntelError     string
-}
-
-func CreateIntelStatusCodeMetric(httpStatusCode int, intelErrorCode string) StatusCodeMetric {
-	var Status StatusCode
-	if httpStatusCode >= 400 && httpStatusCode < 500 {
-		Status = InvalidRegistrationRequest
-	} else {
-		Status = IntelRegServiceRequestFailed
-	}
-	return StatusCodeMetric{
-		Status:         Status,
-		HttpStatusCode: strconv.Itoa(httpStatusCode),
-		IntelError:     intelErrorCode,
-	}
 }
 
 func CreateUnknownErrorStatusCodeMetric() StatusCodeMetric {

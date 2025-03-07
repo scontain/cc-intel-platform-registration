@@ -25,6 +25,9 @@ clean:
 mp_management:
 	cd $(PWD)/third_party/mp_management && $(MAKE) 
 
+sgx_platform_info:
+	cd $(PWD)/third_party/sgx_platform_info && $(MAKE) 
+
 
 deps:
 	$(GOMOD) download
@@ -86,7 +89,7 @@ lint-config: golangci-lint ## Verify golangci-lint linter configuration
 
 ##@ Build
 .PHONY: build
-build: mp_management  deps fmt vet  ## Build manager binary.
+build: mp_management sgx_platform_info  deps fmt vet  ## Build manager binary.
 	$(GOBUILD) -o $(BINARY_NAME)  -trimpath
 
 .PHONY: run

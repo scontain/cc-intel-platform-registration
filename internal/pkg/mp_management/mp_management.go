@@ -1,4 +1,4 @@
-package mp_management
+package mpmanagement
 
 /*
 #cgo CXXFLAGS: -std=c++17
