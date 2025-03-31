@@ -57,6 +57,10 @@ func (rc *DefaultRegistrationChecker) Check() (metrics.StatusCodeMetric, error) 
 
 	platformInfo, err := sgxplatforminfo.GetSgxPcePlatformInfo()
 	if err != nil {
+<<<<<<< HEAD
+=======
+		rc.log.Error("unable to get platform info", zap.Error(err))
+>>>>>>> 4b4d82e (feat: sgx direct registration confirmation)
 		return metrics.StatusCodeMetric{Status: metrics.RetryNeeded}, err
 	}
 

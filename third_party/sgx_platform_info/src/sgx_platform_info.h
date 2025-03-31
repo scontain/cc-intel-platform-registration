@@ -11,7 +11,11 @@ extern "C"
 #define GET_PLATFORM_MK_ERROR(x) (0x0000F000 | (x))
     typedef enum _get_plaform_error_t
     {
+<<<<<<< HEAD
         /* Enclave creation Failed */
+=======
+        /* PCE could not sign at the requested TCB */
+>>>>>>> 4b4d82e (feat: sgx direct registration confirmation)
         ENCLAVE_CREATE_FAIL = GET_PLATFORM_MK_ERROR(0x0009),
     } get_plaform_error_t;
 

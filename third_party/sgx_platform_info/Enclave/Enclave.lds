@@ -7,4 +7,8 @@ Enclave.so
         g_peak_heap_used;
     local:
         *;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 4b4d82e (feat: sgx direct registration confirmation)
