@@ -100,7 +100,10 @@ func (r *RegistrationService) CheckRegistrationStatus() {
 		r.log.Error("error getting the registration status", zap.Error(err))
 	}
 	r.log.Debug("Registration check completed", zap.String("status", statusCodeMetric.Status.String()))
-	r.serverMetrics.UpdateServiceStatusCodeMetric(statusCodeMetric)
+	err = r.serverMetrics.UpdateServiceStatusCodeMetric(statusCodeMetric)
+	if err != nil {
+		r.log.Error("error in updating the service status code metric", zap.Error(err))
+	}
 }
 
 func NewRegistrationService(logger *zap.Logger, intervalDuration time.Duration) *RegistrationService {
