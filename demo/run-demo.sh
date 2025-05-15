@@ -129,7 +129,7 @@ deploy_helm() {
   # Create docker registry secret
   echo -e "${YELLOW}Creating registry pull secret...${NC}"
   kubectl create secret docker-registry reg-svc-pull-secret \
-    --docker-server=registry.scontain.com \
+    --docker-server=$REGISTRY \
     --docker-username="$REGISTRY_USERNAME" \
     --docker-password="$REGISTRY_ACCESS_TOKEN" \
     --docker-email="$REGISTRY_EMAIL" \
