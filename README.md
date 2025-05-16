@@ -24,7 +24,6 @@ These metrics can be visualized through a Grafana dashboard to monitor the platf
 When creating your cluster with `k3d`, you should explicitly bind the `/sys/firmware/efi/efivars` volume to your nodes:
 
 ```bash
-
 # Example: A cluster with 1 server and 2 agent nodes
 k3d cluster create my-cluster-name \
     --agents 2 \
@@ -32,9 +31,9 @@ k3d cluster create my-cluster-name \
     -v /sys/firmware/efi/efivars:/sys/firmware/efi/efivars@server:0 
 ```
 
-### SGX Device Support 
+### SGX Device Support
 
-The service requires a `sgx.intel.com/enclave: 1` resource on Kubernetes. 
+The service requires a `sgx.intel.com/enclave: 1` resource on Kubernetes.
 For deploying with docker-compose, it requires access to `/dev/sgx_enclave`.
 
 ## Installation
@@ -42,7 +41,6 @@ For deploying with docker-compose, it requires access to `/dev/sgx_enclave`.
 ### Get the latest Image
 
 ```bash
-
 docker pull ghcr.io/opensovereigncloud/cc-intel-platform-registration:latest
 ```
 
@@ -51,7 +49,6 @@ docker pull ghcr.io/opensovereigncloud/cc-intel-platform-registration:latest
 If you want to build the image yourself:
 
 ```bash
-
 # Set environment variables
 export REGISTRY=my_registry_name
 
@@ -63,7 +60,8 @@ make build-image IMAGE_REGISTRY=$REGISTRY VERSION=$VERSION
 # Push to registry (optional)
 docker push $REGISTRY/cc-intel-platform-registration:$VERSION
 ```
-This repository contains [helm charts](/charts) for easy installation on Kubernetes. 
+
+This repository contains [helm charts](/charts) for easy installation on Kubernetes.
 
 ### Running the Demo script
 
@@ -71,45 +69,44 @@ The fastest way to setup is by running the demo script. This would setup grafana
 
 1. Clone this repository and navigate to the root directory:
 
-   ```bash
+    ```bash
+    git clone https://github.com/opensovereigncloud/cc-intel-platform-registration.git
 
-   git clone https://github.com/opensovereigncloud/cc-intel-platform-registration.git
-
-   cd cc-intel-platform-registration
-   ```
-2. Configure environment variables:
-
-   ```bash
-
-   cp .env.template .env
-
-   # Edit the environmental variables as needed
-   nano .env
-
-   source .env
+    cd cc-intel-platform-registration
    ```
 
-3. Run the demo script:
+1. Configure environment variables:
 
-   ```bash
+    ```bash
+    cp .env.template .env
 
-   chmod +x ./demo/run-demo.sh
+    # Edit the environmental variables as needed
+    nano .env
 
-   ./demo/run-demo.sh
+    source .env
    ```
-4. Choose your deployment option when prompted (Kubernetes or docker-compose).
+
+1. Run the demo script:
+
+    ```bash
+    chmod +x ./demo/run-demo.sh
+
+    ./demo/run-demo.sh
+   ```
+
+1. Choose your deployment option when prompted (Kubernetes or docker-compose).
 
 ### Accessing the Grafana Dashboard
 
 After the demo deployment:
 
 1. Navigate to Grafana in your browser:
-   - For local deployment: [http://localhost:3000](http://localhost:3000)
-   - For Kubernetes deployment: Use port-forwarding or an ingress if configured
+    - For local deployment: [http://localhost:3000](http://localhost:3000)
+    - For Kubernetes deployment: Use port-forwarding or an ingress if configured
 
-2. Log in with the default credentials:
-   - Username: `admin`
-   - Password: `admin`
-   
+1. Log in with the default credentials:
+    - Username: `admin`
+    - Password: `admin`
+
    You can skip the password change for demo purposes.
-3. Click on "Dashboards" in the left side menu and select the "Registration Service" dashboard.
+1. Click on "Dashboards" in the left side menu and select the "Registration Service" dashboard.
