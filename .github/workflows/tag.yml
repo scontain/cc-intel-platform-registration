@@ -56,5 +56,14 @@ jobs:
           ignore-unfixed: true
           severity: "CRITICAL,HIGH"
 
+      - name: Run Trivy in GitHub SBOM mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          format: "github"
+          output: "dependency-results.sbom.json"
+          image-ref: "."
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push image to GHCR
         run: make image-push VERSION=${{ env.IMAGE_TAG }} IMG_REGISTRY=ghcr.io/${{ github.repository_owner }}
